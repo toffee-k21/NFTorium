@@ -17,7 +17,7 @@ export function Floatingmenu() {
       icon: (
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/toffee-k21/NFTorium",
     },
 
     {
@@ -25,21 +25,21 @@ export function Floatingmenu() {
       icon: (
         <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/toffee-k21/NFTorium",
     },
     {
       title: "Components",
       icon: (
         <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/toffee-k21/NFTorium",
     },
     {
       title: "Changelog",
       icon: (
         <IconExchange className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/toffee-k21/NFTorium",
     },
 
     {
@@ -47,14 +47,14 @@ export function Floatingmenu() {
       icon: (
         <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/toffee-k21/NFTorium",
     },
     {
       title: "GitHub",
       icon: (
         <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "https://github.com/toffee-k21/NFTorium",
     },
   ];
   return (
