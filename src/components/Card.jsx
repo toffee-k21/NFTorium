@@ -1,25 +1,84 @@
+import React, { useContext, useEffect, useState } from "react";
+import { DirectionAwareHover } from "./ui/direction-aware-hover";
+import { MyContext } from "../utils/context";
+import ABI from "../utils/ABI.json";
 
+import { ethers, Contract } from "ethers";
 
-import React from "react";
+import Address from "../utils/Address.json";
+import Button from "./Button";
 
+export default function Card({ tokenId }) {
+  const { provider } = useContext(MyContext);
+  const abi = ABI.abi;
+  const contractAddress = Address.contractAddress;
+  const [nftimg, setnftimg] = useState(null);
+  const [owner, setOwner] = useState(null);
+  const [seller, setSeller] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [name, setName] = useState(null);
+  const [displayPrice, setDisplayPrice] = useState(0);
 
-export default function Card() {
-    return (
-      <div className="border bg-black border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative h-[30rem]">
-        {/* <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
-        <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
-        <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
-        <Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" /> */}
+  const getNFTImage = async () => {
+    const signer = await provider.getSigner();
+    const contract = new Contract(contractAddress, abi, signer);
+    const res = await contract.tokenURI(tokenId);
+    console.log("res", res);
+    const fetchedData = await fetch(res);
+    const jsonData = await fetchedData.json();
+    console.log("jsonData", typeof jsonData);
+    jsonData.image ? setnftimg(jsonData.image) : setnftimg(jsonData.img_url);
+    console.log(jsonData.image);
+    console.log("nftimg", nftimg);
+    setOwner(await contract.ownerOf(tokenId));
+    const details = await contract.getListedTokenForId(tokenId);
 
-        {/* <EvervaultCard text="hover" /> */}
+    setName(jsonData.name);
 
-        <h2 className="dark:text-white text-black mt-4 text-sm font-light">
-          Hover over this card to reveal an awesome effect. Running out of copy
-          here.
-        </h2>
-        <p className="text-sm border font-light dark:border-white/[0.2] border-black/[0.2] rounded-full mt-4 text-black dark:text-white px-2 py-0.5">
-          Watch me hover
-        </p>
-      </div>
-    );
+    setSeller(details.seller);
+    const wei = details.price;
+    setPrice(wei);
+
+    try {
+      let priceETH = ethers.formatEther(wei.toString());
+      setDisplayPrice(priceETH);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getNFTImage();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("Updated Display Price:", displayPrice);
+  // }, []);
+
+  const handleBuyNFT = async () => {
+    const signer = await provider.getSigner();
+    const contract = new Contract(contractAddress, abi, signer);
+    const res = await contract.executeSale(tokenId, {
+      value: price,
+    });
+    setOwner(await contract.ownerOf(tokenId));
+  };
+
+  // const imageUrl = { nftimg };
+  return (
+    <div className="h-[40rem] relative flex items-center justify-center " >
+      <DirectionAwareHover imageUrl={nftimg}>
+        <p className="font-bold text-xl">{name}</p>
+        <p className="font-normal text-sm">{displayPrice} ETH</p>
+        <p>{tokenId}</p>
+        <p>owner: {owner}</p>
+        <p>seller: {seller}</p>
+        <button
+          onClick={handleBuyNFT}
+          className="bg-neutral-900 rounded-sm w-52 p-2 "
+        >
+          Buy NFT
+        </button>
+      </DirectionAwareHover>
+    </div>
+  );
 }

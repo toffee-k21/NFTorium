@@ -14,6 +14,7 @@ import { ethers } from "ethers";
 import { Contract } from "ethers";
 import ABI from "../utils/ABI.json";
 import { MyContext } from "../utils/context";
+import Address from "../utils/Address.json";
 
 export function PopUp() {
 
@@ -23,26 +24,24 @@ export function PopUp() {
        const [price, setPrice] = useState(null);
        const [fileUrl, setFileUrl] = useState(null);
        const [message, setMessage] = useState(null);
-       const { provider } = useContext(MyContext);
+      //  const { provider } = useContext(MyContext);
+       const abi = ABI.abi;
+       const contractAddress = Address.contractAddress;
            const uploadFile = async () => {
              const response = await uploadFileToIPFS(file);
              setFileUrl(response);
              console.log(fileUrl);
            };
-           let contract;
-           let abi = ABI.abi;
 
-           let contractAddress = "0x2464fe86876495e877ad12fd8f418a991d9548b9";
            const uploadJSON = async () => {
              console.log({ name: name, description: desc, img_url: fileUrl });
-             const response = await uploadJSONToIPFS(
-               JSON.stringify({
-                 name: name,
-                 description: desc,
-                 img_url: fileUrl,
-               })
-             );
+             const response = await uploadJSONToIPFS({
+               name: name,
+               description: desc,
+               image: fileUrl,
+             });
              // let provider = JSON.parse(localStorage.getItem("provider"));
+             const provider = new ethers.BrowserProvider(window.ethereum);
              console.log("provider", provider);
              let signer = await provider.getSigner();
              console.log(
@@ -52,8 +51,8 @@ export function PopUp() {
                abi,
                "signer:",
                signer
-             );
-             contract = new Contract(contractAddress, abi, signer);
+              );
+             const contract = new ethers.Contract(contractAddress, abi, signer);
              let valueInWei = "0";
              if (price != null) {
                valueInWei = ethers.parseEther(price.toString());
@@ -62,7 +61,7 @@ export function PopUp() {
              console.log("contract", contract);
              console.log("contract", typeof valueInWei.toString());
              const txn = await contract.createToken(response, valueInWei, {
-               value: ethers.parseEther("0.01").toString(),
+               value: ethers.parseEther("0.01"),
              }); //takes in wei
              await txn.wait(5);
              setMessage("Listed");

@@ -39,11 +39,12 @@ export const uploadFileToIPFS = async (file)=>{
     })
 }
 
-export const uploadJSONToIPFS = async (jsonFile)=>{
+export const uploadJSONToIPFS = async (jsonObj)=>{
   
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+    console.log("jsonFile",jsonObj)
 
-    return axios.post(url, jsonFile, {
+    return axios.post(url, jsonObj, {
         headers: {
             pinata_api_key: key,
             pinata_secret_api_key: secret,
