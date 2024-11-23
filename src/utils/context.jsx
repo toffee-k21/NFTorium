@@ -4,9 +4,14 @@ export const MyContext = createContext(undefined);
 
 export const MyProvider = ({ children }) => {
     const [provider, setProvider] = useState(undefined);
-    return <MyContext.Provider value={{ provider, setProvider }}>
+    const [NFTdetails, setNFTdetails] = useState(undefined);
+    return (
+      <MyContext.Provider
+        value={{ provider, setProvider, NFTdetails, setNFTdetails }}
+      >
         {children}
-    </MyContext.Provider>
+      </MyContext.Provider>
+    );
 }
 
 // export const useProviderContext = () => {
