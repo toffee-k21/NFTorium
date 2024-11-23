@@ -17,22 +17,22 @@ export function Floatingmenu() {
       icon: (
         <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://github.com/toffee-k21/NFTorium",
+      href: "/",
     },
 
     {
-      title: "Products",
+      title: "Explore",
       icon: (
         <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://github.com/toffee-k21/NFTorium",
+      href: "/view",
     },
     {
-      title: "Components",
+      title: "List NFT",
       icon: (
         <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://github.com/toffee-k21/NFTorium",
+      href: "/list",
     },
     {
       title: "Changelog",
@@ -58,7 +58,7 @@ export function Floatingmenu() {
     },
   ];
   return (
-    <div className="flex items-center justify-center top-[500px] left-5 fixed z-50">
+    <div className="flex items-center justify-center top-[500px] left-16 fixed z-50">
       <FloatingDock
         // only for demo, remove for production
         mobileClassName="translate-y-20"
