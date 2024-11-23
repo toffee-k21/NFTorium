@@ -45,9 +45,9 @@ const Viewnft = () => {
 
 
   return (
-    <div className="dark:bg-neutral-800">
+    <div className="dark:bg-neutral-950">
       <div className="h-[500px] w-full">
-        <div className="sticky top-0 left-0 dark:bg-neutral-800 h-40 w-full">
+        <div className="sticky top-0 left-0 dark:bg-neutral-950 h-40 w-full">
           <form class=" relative top-24 mr-10 ml-36 w-[1000px]">
             <label
               for="default-search"
@@ -58,7 +58,7 @@ const Viewnft = () => {
             <div class=" relative flex justify-center items-center">
               <div class=" inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
-                  class="absolute left-6 w-4 h-4 text-gray-500 dark:bg-neutral-800"
+                  class="absolute left-6 w-4 h-4 text-gray-500 dark:bg-neutral-950"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -76,7 +76,7 @@ const Viewnft = () => {
               <input
                 type="search"
                 id="default-search"
-                class="inline-block w-[100%] p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-neutral-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4 "
+                class="inline-block w-[100%] p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-neutral-950 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-4 "
                 placeholder="Search Mockups, Logos..."
                 required
               />

@@ -47,7 +47,7 @@ export default function CardContainer() {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-900 w-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
+        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-950 w-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
         // for your use case, use `h-screen` instead of `h-[60vh]`
         "h-[85%]"
       )}
@@ -106,7 +106,7 @@ const Dashboard = () => {
           {[...new Array(8)].map((i) => (
             <div
               key={"first-array" + i}
-              className="h-80 w-[365px] rounded-lg  bg-gray-100 dark:bg-neutral-900 animate-pulse"
+              className="h-80 w-[373px] rounded-lg  bg-gray-100 dark:bg-neutral-900 animate-pulse"
             ></div>
           ))}
         </div>
