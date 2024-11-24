@@ -32,7 +32,7 @@ const Nav = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50  px-4 ">
       <nav className="mx-auto flex max-w-7xl items-center py-2 w-full">
-        <div className="flex justify-between w-[90%] px-[10%] py-4">
+        <div className="flex justify-between w-full px-[10%] py-4">
           <div className="text-white">
             <span>
               <img src={logo} className="w-14 inline-block" />

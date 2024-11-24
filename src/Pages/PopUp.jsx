@@ -15,6 +15,7 @@ import { Contract } from "ethers";
 import ABI from "../utils/ABI.json";
 import { MyContext } from "../utils/context";
 import Address from "../utils/Address.json";
+import { useNavigate } from "react-router-dom";
 
 export function PopUp() {
 
@@ -24,6 +25,7 @@ export function PopUp() {
        const [price, setPrice] = useState(null);
        const [fileUrl, setFileUrl] = useState(null);
        const [message, setMessage] = useState(null);
+       const redirect = useNavigate();
       //  const { provider } = useContext(MyContext);
        const abi = ABI.abi;
        const contractAddress = Address.contractAddress;
@@ -63,12 +65,24 @@ export function PopUp() {
              const txn = await contract.createToken(response, valueInWei, {
                value: ethers.parseEther("0.01"),
              }); //takes in wei
-             await txn.wait(5);
              setMessage("Listed");
+             await txn.wait(2);
+             redirect("/view");
            };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl sm:p-4 pt-20 md:p-8 shadow-input bg-white dark:bg-black/70">
+      {fileUrl ? (
+        <div
+          class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-neutral-900 dark:text-green-400 "
+          role="alert"
+        >
+          <span class="font-medium">Successfully uploaded !</span> You have
+          uploaded file on ipfs
+        </div>
+      ) : (
+        <></>
+      )}
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to NFT marketplace
       </h2>
@@ -128,12 +142,21 @@ export function PopUp() {
           type="text"
         />
       </LabelInputContainer>
-
+      {message == "Listed" ? (
+        <div
+          class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+          role="alert"
+        >
+          <span class="font-medium">Wait !</span> You will be redirect after minting
+        </div>
+      ) : (
+        <></>
+      )}
       <button
         className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
         onClick={() => uploadJSON()}
       >
-        List my NFT &rarr;
+        List my NFT
         <BottomGradient />
       </button>
 

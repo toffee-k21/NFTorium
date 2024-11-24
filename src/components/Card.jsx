@@ -20,7 +20,7 @@ export default function Card({ tokenId }) {
   const [name, setName] = useState(null);
   const [displayPrice, setDisplayPrice] = useState(0);
 
-  const { NFTdetails, setNFTdetails  } = useContext(MyContext);
+
 
   const getNFTImage = async () => {
      const provider = new ethers.BrowserProvider(window.ethereum);
@@ -78,11 +78,11 @@ export default function Card({ tokenId }) {
           {/* <p>{tokenId}</p>
         <p>owner: {owner}</p>
         <p>seller: {seller}</p> */}
-          <Button
+          {/* <Button
             onClick={handleBuyNFT}
             className=" rounded-sm w-44 p-2 my-2 z-20"
             text="Buy now"
-          ></Button>
+          ></Button> */}
         </DirectionAwareHover>
       </div>
     </Link>

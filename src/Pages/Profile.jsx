@@ -6,19 +6,20 @@ import { ethers, Contract } from 'ethers';
 import Address from '../utils/Address.json';
 import { use } from 'framer-motion/client';
 import Card from '../components/Card';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
     // const { provider } = useContext(MyContext);
     const abi = ABI.abi;
     const contractAddress = Address.contractAddress;
-    const [result, setResult] = useState(null);                
+    const [result, setResult] = useState([]);                
 
     const fetchNFTDetails = async () => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const contract = new Contract(contractAddress, abi, signer);
         const res = await contract.getMyNFTs();
-        console.log("res", res);
+        console.log("res", res.name);
         setResult(res);
     };
 
@@ -27,8 +28,18 @@ const Profile = () => {
     }, []);
 
   return (
-    <div className='bg-black pt-32 px-20 flex flex-col justify-center items-center'>
-      <h1 className="text-white text-5xl font-bold">Your NFTs</h1>
+    <div className="bg-black pt-32 px-20 flex flex-col items-center h-screen">
+        <div className=''>
+      <h1 className="text-white text-5xl font-bold">
+        Your NFTs
+          </h1>
+          {" "}
+          {result.name == undefined && (
+            <div className="text-white p-2">You don't own any NFT <Link to={"/view"} className='text-neutral-500 cursor-pointer' >Explore Some</Link></div>
+          )}
+        </div>
+
+      {/* <div className="text-white">You don't own any NFT </div> */}
       <div className="flex pt-20 px-20 flex-wrap bg-black justify-center">
         {result?.map((i) => (
           <Card

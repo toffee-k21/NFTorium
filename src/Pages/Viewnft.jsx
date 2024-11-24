@@ -18,7 +18,6 @@ const Viewnft = () => {
  const [result, setResult] = useState([]);
  const [resultCopy, setResultCopy] = useState([]);
  const [search, setSearch] = useState([]);
- const { NFTdetails, setNFTdetails } = useContext(MyContext);
 //  let provider;
 
   async function getAllNFTs() {

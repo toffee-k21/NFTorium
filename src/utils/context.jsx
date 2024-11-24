@@ -4,10 +4,10 @@ export const MyContext = createContext(undefined);
 
 export const MyProvider = ({ children }) => {
     const [provider, setProvider] = useState(undefined);
-    const [NFTdetails, setNFTdetails] = useState(undefined);
+    const [yourNfts,setYourNfts] = useState(undefined);
     return (
       <MyContext.Provider
-        value={{ provider, setProvider, NFTdetails, setNFTdetails }}
+        value={{ provider, setProvider, yourNfts, setYourNfts }}
       >
         {children}
       </MyContext.Provider>

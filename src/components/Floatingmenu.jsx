@@ -7,6 +7,7 @@ import {
   IconHome,
   IconNewSection,
   IconTerminal2,
+  IconUserBolt,
 } from "@tabler/icons-react";
 
 
@@ -35,11 +36,11 @@ export function Floatingmenu() {
       href: "/list",
     },
     {
-      title: "Changelog",
+      title: "profile",
       icon: (
-        <IconExchange className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconUserBolt className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "https://github.com/toffee-k21/NFTorium",
+      href: "/profile",
     },
 
     {
@@ -58,7 +59,7 @@ export function Floatingmenu() {
     },
   ];
   return (
-    <div className="flex items-center justify-center top-[75%] md:top-[500px] left-4 md:left-16 fixed z-50">
+    <div className="flex items-center justify-center bottom-6 left-4 md:left-16 fixed z-50">
       <FloatingDock
         // only for demo, remove for production
         mobileClassName="translate-y-20"
