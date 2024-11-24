@@ -189,13 +189,13 @@ const NFT = () => {
                       <div className="absolute -top-10 left-0 z-50 w-full h-[150px] flex flex-col justify-center bg-neutral-900 p-2">
                         <label className='text-white'>Enter Price</label>
                         <input
-                          className="w-full bg-neutral-900 my-2 border-[1px] p-2"
+                          className="w-full rounded-md bg-neutral-900 my-2 border-[1px] p-2"
                           type="number"
                           onChange={(e) => setReSellPrice(e.target.value)}
                         />{" "}
                         <div className='flex '>
-                        <Button className={"w-full"} text={"Sell !"} onClick={handleRelistNFT} />
-                        <div className="w-full bg-black text-white flex justify-center items-center font-semibold" onClick={()=>setPricePop(false)}>X </div>
+                        <Button className={"w-full mr-1"} text={"Sell !"} onClick={handleRelistNFT} />
+                        <div className="w-full rounded-lg ml-1 bg-black text-white flex justify-center items-center font-semibold cursor-pointer" onClick={()=>setPricePop(false)}>X </div>
                         </div>
                       </div>
                     ) : (
@@ -215,7 +215,7 @@ const NFT = () => {
                   <Button
                     text="Buy NFT"
                     className={"w-1/2"}
-                    onClick={setPricePop(true)}
+                    onClick={()=>setPricePop(true)}
                   />
                 ) : (
                   <button

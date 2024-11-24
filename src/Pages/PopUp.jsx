@@ -42,7 +42,7 @@ export function PopUp() {
                description: desc,
                image: fileUrl,
              });
-             // let provider = JSON.parse(localStorage.getItem("provider"));
+            
              const provider = new ethers.BrowserProvider(window.ethereum);
              console.log("provider", provider);
              let signer = await provider.getSigner();

@@ -29,7 +29,7 @@ export function Floatingmenu() {
       href: "/view",
     },
     {
-      title: "List NFT",
+      title: "Mint NFT",
       icon: (
         <IconNewSection className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
