@@ -25,7 +25,7 @@ export default function CardContainer({nfts}) {
     },
     {
       label: "Profile",
-      href: "#",
+      href: "/profile",
       icon: (
         <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -105,7 +105,7 @@ const Dashboard = ({nfts}) => {
   return (
     <div className="flex flex-1 ">
       <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black flex flex-col gap-2 flex-1 w-full h-full">
-        <div className="flex gap-2 flex-wrap overflow-y-scroll" style={{scrollbarWidth:"none"}}>
+        <div className="flex gap-2 flex-wrap overflow-y-scroll justify-center" style={{scrollbarWidth:"none"}}>
           {nfts.map((i) => (
             <Card
               key={"first-array" + i}
