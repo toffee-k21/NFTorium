@@ -30,9 +30,9 @@ const Nav = () => {
     checkWalletConnect();
   }, [walletConnect,provider]);
   return (
-    <header className="fixed inset-x-0 top-0 z-50  px-4">
-      <nav className="mx-auto flex max-w-7xl items-center py-2">
-        <div className="flex justify-between w-full px-16 py-4">
+    <header className="fixed inset-x-0 top-0 z-50  px-4 ">
+      <nav className="mx-auto flex max-w-7xl items-center py-2 w-full">
+        <div className="flex justify-between w-[90%] px-[10%] py-4">
           <div className="text-white">
             <span>
               <img src={logo} className="w-14 inline-block" />
@@ -40,7 +40,7 @@ const Nav = () => {
             <span className="mx-4 text-gray-500"> | </span> NFTorium
           </div>
           <Button
-            className="w-full bg-[#383737] px-3 py-2 hover:bg-[#4f4e4e] sm:w-auto sm:bg-transparent text-white"
+            className="w-full bg-[#383737] px-3 py-2 hover:bg-[#4f4e4e] sm:w-auto sm:bg-transparent text-white sm:block hidden"
             onClick={handleWalletConnect}
             text={walletConnect}
           ></Button>

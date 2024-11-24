@@ -5,6 +5,7 @@ import ABI from "../utils/ABI.json";
 import { ethers, Contract } from "ethers";
 import Address from "../utils/Address.json";
 import { desc } from 'framer-motion/client';
+import Button from './Button';
 
 const NFT = () => {
     const tokenId = useParams().id;
@@ -21,11 +22,12 @@ const NFT = () => {
      const [name, setName] = useState(null);
      const [desc, setDesc] = useState(null);
      const [displayPrice, setDisplayPrice] = useState(0);
+     let provider;
 
      const { NFTdetails, setNFTdetails } = useContext(MyContext);
 
      const getNFTImage = async () => {
-         const provider = new ethers.BrowserProvider(window.ethereum);
+         provider = new ethers.BrowserProvider(window.ethereum);
        const signer = await provider.getSigner();
        const contract = new Contract(contractAddress, abi, signer);
        const res = await contract.tokenURI(tokenId);
@@ -56,6 +58,15 @@ const NFT = () => {
        }
      };
 
+       const handleBuyNFT = async () => {
+         const signer = await provider.getSigner();
+         const contract = new Contract(contractAddress, abi, signer);
+         const res = await contract.executeSale(tokenId, {
+           value: price,
+         });
+         setOwner(await contract.ownerOf(tokenId));
+       };
+
      useEffect(() => {
        getNFTImage();
      }, []);
@@ -68,11 +79,7 @@ const NFT = () => {
           <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
             <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
               <img class="w-full dark:hidden" src={nftimg} alt="" />
-              <img
-                class="w-full hidden dark:block"
-                src={nftimg}
-                alt=""
-              />
+              <img class="w-full hidden dark:block" src={nftimg} alt="" />
             </div>
 
             <div class="mt-6 sm:mt-8 lg:mt-0">
@@ -83,7 +90,6 @@ const NFT = () => {
                 <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
                   {displayPrice} ETH
                 </p>
-
               </div>
 
               <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
@@ -139,12 +145,13 @@ const NFT = () => {
                   Add to cart
                 </a>
               </div>
+              <div className=" pb-4 pt-10">
+                <Button text="Buy Now" onClick={handleBuyNFT} />
+              </div>
 
               <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
-              <p class="mb-6 text-gray-500 dark:text-gray-400">
-                {desc}
-              </p>
+              <p class="mb-6 text-gray-500 dark:text-gray-400">{desc}</p>
 
               <p class="text-gray-500 dark:text-gray-400">
                 <div>Owner : {owner} </div>

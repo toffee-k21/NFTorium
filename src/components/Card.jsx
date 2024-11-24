@@ -71,7 +71,7 @@ export default function Card({ tokenId }) {
   // const imageUrl = { nftimg };
   return (
     <Link to={`/view/${tokenId}`}>
-      <div className="m-[8px] w-[357px] relative flex items-center justify-center ">
+      <div className="m-2 md:m-[8px] w-[250px] sm:w-[357px] relative flex items-center justify-center ">
         <DirectionAwareHover imageUrl={nftimg}>
           <p className="font-bold text-xl">{name}</p>
           <p className="font-normal text-sm">{displayPrice} ETH</p>

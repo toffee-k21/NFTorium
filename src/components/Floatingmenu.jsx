@@ -58,7 +58,7 @@ export function Floatingmenu() {
     },
   ];
   return (
-    <div className="flex items-center justify-center top-[500px] left-16 fixed z-50">
+    <div className="flex items-center justify-center top-[75%] md:top-[500px] left-4 md:left-16 fixed z-50">
       <FloatingDock
         // only for demo, remove for production
         mobileClassName="translate-y-20"
