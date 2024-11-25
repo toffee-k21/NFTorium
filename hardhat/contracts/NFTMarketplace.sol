@@ -36,7 +36,7 @@ contract NFTMarketplace is ERC721URIStorage {
     //the event emitted when a token is successfully listed
     event TokenListedSuccess (
         uint256 indexed tokenId,
-        address owner,
+        address owner,//here owner in struct is smart contract owner
         address seller,
         uint256 price,
         bool currentlyListed
@@ -141,7 +141,7 @@ contract NFTMarketplace is ERC721URIStorage {
         require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
         //update the details of the token
-        idToListedToken[tokenId].currentlyListed = true;
+        idToListedToken[tokenId].currentlyListed = false;
         idToListedToken[tokenId].seller = payable(msg.sender);
         _itemsSold.increment();
 
@@ -155,6 +155,20 @@ contract NFTMarketplace is ERC721URIStorage {
         //Transfer the proceeds from the sale to the seller of the NFT
         payable(seller).transfer(msg.value);
     }
+
+    function relistToken(uint256 tokenId, uint256 price) public payable {
+    require(msg.sender == ownerOf(tokenId), "Only the owner can relist the token");
+    require(price > 0, "Price must be greater than zero");
+    require(msg.value == listPrice, "Pay the listing fee");
+
+    idToListedToken[tokenId].price = price;
+    idToListedToken[tokenId].currentlyListed = true;
+    idToListedToken[tokenId].seller = payable(msg.sender);
+
+    _transfer(msg.sender, address(this), tokenId);
+    emit TokenListedSuccess(tokenId, address(this), msg.sender, price, true);
+}
+
 
 
         function updateListPrice(uint256 _listPrice) public payable {

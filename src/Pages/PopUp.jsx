@@ -32,10 +32,23 @@ export function PopUp() {
            const uploadFile = async () => {
              const response = await uploadFileToIPFS(file);
              setFileUrl(response);
+             setMessage("Uploaded File");
              console.log(fileUrl);
            };
 
            const uploadJSON = async () => {
+            if(fileUrl == null) {
+              setMessage("Empty");
+              return;
+            }
+            else if(name == null | undefined) {
+              setMessage("Empty Name");
+              return;
+            }
+            else if (price == null | undefined) {
+              setMessage("Empty Price");
+              return;
+            }
              console.log({ name: name, description: desc, img_url: fileUrl });
              const response = await uploadJSONToIPFS({
                name: name,
@@ -72,13 +85,24 @@ export function PopUp() {
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl sm:p-4 pt-20 md:p-8 shadow-input bg-white dark:bg-black/70">
-      {fileUrl ? (
+      {message == "Uploaded File" ? (
         <div
-          class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-neutral-900 dark:text-green-400 "
+          className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-neutral-900 dark:text-green-400 "
           role="alert"
         >
-          <span class="font-medium">Successfully uploaded !</span> You have
+          <span className="font-medium">Successfully uploaded !</span> You have
           uploaded file on ipfs
+        </div>
+      ) : (
+        <></>
+      )}
+      {message == "Empty" ? (
+        <div
+          className="p-4 mb-4 text-sm text-yellow-400 rounded-lg bg-blue-50 dark:bg-neutral-800 dark:text-yellow-400"
+          role="alert"
+        >
+          <span className="font-medium">Warning !</span> You should upload file
+          before Minting
         </div>
       ) : (
         <></>
@@ -89,6 +113,16 @@ export function PopUp() {
       <p className="text-neutral-600 text-sm max-w-sm my-2 dark:text-neutral-300">
         Explore the world of NFTs and create your own NFTs
       </p>
+        {message == "Empty Name" ? (
+          <div
+            className="p-4 mb-4 text-sm text-yellow-400 rounded-lg bg-blue-50 dark:bg-neutral-800 dark:text-yellow-400"
+            role="alert"
+          >
+            <span className="font-medium">Warning !</span> You Should give name to NFT
+          </div>
+        ) : (
+          <></>
+        )}
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
         <LabelInputContainer>
           <Label htmlFor="firstname">Name of nft</Label>
@@ -124,6 +158,17 @@ export function PopUp() {
           <BottomGradient />
         </button>
       </LabelInputContainer>
+      {message == "Empty Price" ? (
+        <div
+          className="p-4 mb-4 text-sm text-yellow-400 rounded-lg bg-blue-50 dark:bg-neutral-800 dark:text-yellow-400"
+          role="alert"
+        >
+          <span className="font-medium">Warning !</span> You should set Price
+          before Minting
+        </div>
+      ) : (
+        <></>
+      )}
       <LabelInputContainer className="mb-4">
         <Label htmlFor="Number">Set price of NFT</Label>
         <Input
@@ -147,11 +192,13 @@ export function PopUp() {
           class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
           role="alert"
         >
-          <span class="font-medium">Wait !</span> You will be redirect after minting
+          <span class="font-medium">Wait !</span> You will be redirect after
+          minting
         </div>
       ) : (
         <></>
       )}
+
       <button
         className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
         onClick={() => uploadJSON()}

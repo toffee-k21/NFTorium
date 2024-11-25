@@ -215,7 +215,7 @@ const NFT = () => {
                   <Button
                     text="Buy NFT"
                     className={"w-1/2"}
-                    onClick={()=>setPricePop(true)}
+                    onClick={handleBuyNFT}
                   />
                 ) : (
                   <button
