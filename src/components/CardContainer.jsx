@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "./ui/sidebar";
 import {
   IconArrowLeft,
+  IconBrandGithub,
   IconBrandTabler,
   IconSettings,
   IconUserBolt,
@@ -17,8 +18,8 @@ export default function CardContainer({nfts}) {
   console.log("nfts",nfts);
   const links = [
     {
-      label: "Dashboard",
-      href: "#",
+      label: "Home",
+      href: "/",
       icon: (
         <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -31,15 +32,15 @@ export default function CardContainer({nfts}) {
       ),
     },
     {
-      label: "Settings",
-      href: "#",
+      label: "Github",
+      href: "https://github.com/toffee-k21/NFTorium",
       icon: (
-        <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconBrandGithub className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
-      label: "Logout",
-      href: "#",
+      label: "openSea",
+      href: "https://testnets.opensea.io/collection/aasiyanft-4",
       icon: (
         <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),

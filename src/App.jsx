@@ -7,6 +7,7 @@ import { Floatingmenu } from "./components/Floatingmenu";
 import Viewnft from "./Pages/viewNFT";
 import NFT from "./components/NFT";
 import Profile from "./Pages/Profile";
+import Home from "./Pages/Home";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             {/* <Route path="/list" element={<Home />} /> */}
             <Route path="/list" element={<Listnft />} />
+            <Route path="/" element={<Home />} />
             <Route path="/view" element={<Viewnft />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/view/:id" element={<NFT />} />

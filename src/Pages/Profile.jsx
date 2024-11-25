@@ -28,16 +28,23 @@ const Profile = () => {
     }, []);
 
   return (
-    <div className="bg-black pt-32 px-20 flex flex-col items-center h-screen">
-        <div className=''>
-      <h1 className="text-white text-5xl font-bold">
-        Your NFTs
-          </h1>
-          {" "}
-          {result.name == undefined && (
-            <div className="text-white p-2">You don't own any NFT <Link to={"/view"} className='text-neutral-500 cursor-pointer' >Explore Some</Link></div>
-          )}
-        </div>
+    <div className="bg-black pt-32 px-44 flex flex-col items-center justify-center">
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-white text-5xl font-bold p-6">Your NFTs</h1>{" "}
+        {result.name == undefined && (
+          <div className="text-white p-2 w-2/3">
+            You may not own, even if you are the creater of NFT beacuse you are
+            listing NFT by tranfering ownership to this NFT marketplace.
+            <span className="text-neutral-500 cursor-pointer">
+              {" "}
+              If you really wants to own from this contract pay for ! dont worry
+              ultimatley fee will be tranfer to you. 
+            </span>{" "}
+            for more query you can {" "}
+            <a href="https://github.com/toffee-k21/NFTorium" className='text-blue-500'>reach out to us</a>
+          </div>
+        )}
+      </div>
 
       {/* <div className="text-white">You don't own any NFT </div> */}
       <div className="flex pt-20 px-20 flex-wrap bg-black justify-center">
