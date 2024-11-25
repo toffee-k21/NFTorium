@@ -12,11 +12,13 @@ const Profile = () => {
     // const { provider } = useContext(MyContext);
     const abi = ABI.abi;
     const contractAddress = Address.contractAddress;
-    const [result, setResult] = useState([]);                
+    const [result, setResult] = useState([]); 
+    const [youraddress, setYouraddress] = useState(null);             
 
     const fetchNFTDetails = async () => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
+        setYouraddress(signer.address);
         const contract = new Contract(contractAddress, abi, signer);
         const res = await contract.getMyNFTs();
         console.log("res", res.name);
@@ -38,10 +40,15 @@ const Profile = () => {
             <span className="text-neutral-500 cursor-pointer">
               {" "}
               If you really wants to own from this contract pay for ! dont worry
-              ultimatley fee will be tranfer to you. 
+              ultimatley fee will be tranfer to you.
             </span>{" "}
-            for more query you can {" "}
-            <a href="https://github.com/toffee-k21/NFTorium" className='text-blue-500'>reach out to us</a>
+            for more query you can{" "}
+            <a
+              href="https://github.com/toffee-k21/NFTorium"
+              className="text-blue-500"
+            >
+              reach out to us
+            </a>
           </div>
         )}
       </div>
@@ -55,6 +62,15 @@ const Profile = () => {
             tokenId={i[0].toString()}
           ></Card>
         ))}
+      </div>
+      <div className='text-neutral-300 text-lg  p-2 m-8'>
+        Check your NFTs on{" "}
+        <Link
+          to={`https://testnets.opensea.io/${youraddress}`}
+          className="text-blue-500"
+        >
+          OpenSea
+        </Link>
       </div>
     </div>
   );
