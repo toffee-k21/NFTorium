@@ -1,16 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DirectionAwareHover } from "./ui/direction-aware-hover";
-import { MyContext } from "../utils/context";
 import ABI from "../utils/ABI.json";
-
 import { ethers, Contract } from "ethers";
-
 import Address from "../utils/Address.json";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { useWallet } from "../utils/WalletProvider";
 
 export default function Card({ tokenId }) {
-  const { provider } = useContext(MyContext);
   const abi = ABI.abi;
   const contractAddress = Address.contractAddress;
   const [nftimg, setnftimg] = useState(null);
@@ -20,11 +17,9 @@ export default function Card({ tokenId }) {
   const [name, setName] = useState(null);
   const [displayPrice, setDisplayPrice] = useState(0);
 
-
+  const {signer} = useWallet();
 
   const getNFTImage = async () => {
-     const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
     const contract = new Contract(contractAddress, abi, signer);
     const res = await contract.tokenURI(tokenId);
     console.log("res", res);

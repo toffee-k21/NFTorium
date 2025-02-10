@@ -3,32 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../utils/context";
 import Button from "./Button";
 import logo from "../assets/NFTorium-logo.png";
+import { useWallet } from "../utils/WalletProvider";
 
 const Nav = () => {
   const [walletConnect, setWalletConnect] = useState("Connect Wallet");
-  let {provider, setProvider} = useContext(MyContext);
-  const handleWalletConnect = async () => {
+  // let {provider, setProvider} = useContext(MyContext);
+ const { connectWallet, signer, account } = useWallet();
+ 
 
-    if (window.ethereum == null) {
-      console.log("MetaMask not installed; using read-only defaults");
-    } else {
-      console.log("clicked");
-      let provide = new ethers.BrowserProvider(window.ethereum);
-      setProvider(provide);
-      console.log(provider);
-    //   localStorage.setItem("provider", JSON.stringify(provider));
-    }
-  };
-
-  function checkWalletConnect() {
-    if (provider != undefined) {
-      setWalletConnect("Connected");
-    }
-  }
-
-  useEffect(() => {
-    checkWalletConnect();
-  }, [walletConnect,provider]);
   return (
     <header className="fixed inset-x-0 top-0 z-50  px-4 ">
       <nav className="mx-auto flex max-w-7xl items-center py-2 w-full">
@@ -39,11 +21,12 @@ const Nav = () => {
             </span>
             <span className="mx-4 text-gray-500"> | </span> NFTorium
           </div>
-          <Button
-            className="w-full bg-[#383737] px-3 py-2 hover:bg-[#4f4e4e] sm:w-auto sm:bg-transparent text-white sm:block hidden"
-            onClick={handleWalletConnect}
-            text={walletConnect}
-          ></Button>
+          <button
+            className="w-full bg-[#383737] px-3 py-2 hover:bg-[#4f4e4e] sm:w-auto sm:bg-transparent text-white sm:block hidden  text-white font-semibold rounded-lg text-center bg-gradient-to-r p-2 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)] cursor-pointer flex justify-center items-center "
+            onClick={connectWallet}
+          >
+            {signer ? `${account}` : `Connect your Wallet`}
+          </button>
         </div>
       </nav>
     </header>

@@ -10,6 +10,7 @@ import Address from "../utils/Address.json";
 import ABI from "../utils/ABI.json";
 import { Contract, ethers } from "ethers";
 import { Link } from "react-router-dom";
+import { useWallet } from "../utils/WalletProvider";
 
 const Viewnft = () => {
 
@@ -23,13 +24,12 @@ const Viewnft = () => {
  const [recent, setRecent] = useState(null);
 //  let provider;
 
+const {signer} = useWallet();
+
   async function getAllNFTs() {
     try {
-       const provider = new ethers.BrowserProvider(window.ethereum);
-       console.log("provider", provider);
-       let signer = await provider.getSigner();
-       console.log("address:", contractAddress, "abi:", abi, "signer:", signer);
-       const contract = new Contract(contractAddress, abi, signer);
+      console.log("address:", contractAddress, "abi:", abi, "signer:", signer);
+      const contract = new Contract(contractAddress, abi, signer);
       let res = await contract.getAllNFTs();
       setLength(res.length);
       console.log("re.lems", res.length);

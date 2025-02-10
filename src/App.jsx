@@ -8,12 +8,13 @@ import Viewnft from "./Pages/viewNFT";
 import NFT from "./components/NFT";
 import Profile from "./Pages/Profile";
 import Home from "./Pages/Home";
+import { WalletProvider } from "./utils/WalletProvider";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <MyProvider>
+        <WalletProvider>
           <Nav />
           <Routes>
             {/* <Route path="/list" element={<Home />} /> */}
@@ -24,7 +25,7 @@ function App() {
             <Route path="/view/:id" element={<NFT />} />
           </Routes>
           <Floatingmenu />
-        </MyProvider>
+        </WalletProvider>
       </BrowserRouter>
     </>
   );
