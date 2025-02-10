@@ -39,6 +39,9 @@ const {signer} = useWallet();
       console.error('Error calling getAllNFTs:', error);
     }
   }
+
+  getAllNFTs();
+  
   const handleSearch= () => {
     //  checkResultErrors.filter((r)=> NFTdetails.name == result.id);
   //  NFTdetails.filter((r)=>r.name == search);
@@ -51,10 +54,6 @@ const {signer} = useWallet();
 
   search == "" ? setResultCopy(result): setResultCopy(result.filter((r)=>r[0].toString() == search))
   }
-
-  useEffect(() => {
-    getAllNFTs();
-  }, [])
 
 
   return (
