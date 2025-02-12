@@ -4,7 +4,7 @@ import Listnft from "./Pages/Listnft";
 import Nav from "./components/Nav";
 import { MyProvider } from "./utils/context";
 import { Floatingmenu } from "./components/Floatingmenu";
-import Viewnft from "./Pages/viewNFT";
+import Viewnft from "./Pages/Viewnft";
 import NFT from "./components/NFT";
 import Profile from "./Pages/Profile";
 import Home from "./Pages/Home";
