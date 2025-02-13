@@ -1,7 +1,7 @@
 import React from 'react'
 import { WavyBackground } from '../components/ui/wavy-background';
 import { TextGenerateEffect } from '../components/ui/text-generate-effect';
-import eth from "../assets/ethereum-01.png";
+import eth from "../assets/Ethereum-01.png";
 import { Link } from 'react-router-dom';
 
 const Home = () => {
