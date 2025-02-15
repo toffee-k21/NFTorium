@@ -1,28 +1,19 @@
-// import { ethers } from 'ethers';
-import { useContext, useEffect, useState } from "react";
-// import { ThreeDCardDemo } from "../components/3Dcard"
-// import abi from "../utils/ABI.json";
-import { MyContext } from '../utils/context';
-// import Card from "../components/Card";
+import { useEffect, useState } from "react";
 import CardContainer from "../components/CardContainer";
-import Button from "../components/Button";
 import Address from "../utils/Address.json";
 import ABI from "../utils/ABI.json";
-import { Contract, ethers } from "ethers";
+import { Contract } from "ethers";
 import { Link } from "react-router-dom";
 import { useWallet } from "../utils/WalletProvider";
 
 const Viewnft = () => {
 
-//  const { provider } = useContext(MyContext);
  let abi = ABI.abi;
  const contractAddress = Address.contractAddress;
  const [result, setResult] = useState([]);
  const [resultCopy, setResultCopy] = useState([]);
  const [search, setSearch] = useState([]);
  const [length, setLength] = useState([]);
- const [recent, setRecent] = useState(null);
-//  let provider;
 
 const {signer} = useWallet();
 
@@ -40,18 +31,12 @@ const {signer} = useWallet();
     }
   }
 
-  getAllNFTs();
+  useEffect(()=>{
+    getAllNFTs();
+  },[])
   
   const handleSearch= () => {
-    //  checkResultErrors.filter((r)=> NFTdetails.name == result.id);
-  //  NFTdetails.filter((r)=>r.name == search);
-  //  NFTdetails = NFTdetails?.filter((r) => r.name == search);
-  //  console.log(NFTdetails.tokenId);
-
-  //token id
-
   setResultCopy(result);
-
   search == "" ? setResultCopy(result): setResultCopy(result.filter((r)=>r[0].toString() == search))
   }
 
@@ -65,7 +50,6 @@ const {signer} = useWallet();
             onSubmit={(e) => e.preventDefault()}
           >
             <label
-              // for="default-search"
               className=" mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
             >
               Search
