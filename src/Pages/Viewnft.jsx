@@ -7,39 +7,44 @@ import { Link } from "react-router-dom";
 import { useWallet } from "../utils/WalletProvider";
 
 const Viewnft = () => {
+  let abi = ABI.abi;
+  const contractAddress = Address.contractAddress;
+  const [result, setResult] = useState([]);
+  const [resultCopy, setResultCopy] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [length, setLength] = useState([]);
 
- let abi = ABI.abi;
- const contractAddress = Address.contractAddress;
- const [result, setResult] = useState([]);
- const [resultCopy, setResultCopy] = useState([]);
- const [search, setSearch] = useState([]);
- const [length, setLength] = useState([]);
-
-const {signer} = useWallet();
+  const { signer } = useWallet();
 
   async function getAllNFTs() {
+    console.log("address:", contractAddress, "abi:", abi, "signer:", signer);
+    const contract = new Contract(contractAddress, abi, signer);
+    console.log("contract", contract);
     try {
-      console.log("address:", contractAddress, "abi:", abi, "signer:", signer);
-      const contract = new Contract(contractAddress, abi, signer);
-      let res = await contract.getAllNFTs();
-      setLength(res.length);
-      console.log("re.lems", res.length);
-      setResult(res)
-      setResultCopy(res)
-    } catch (error) {
-      console.error('Error calling getAllNFTs:', error);
+      const res = await contract.getAllNFTs();
+    } catch (err) {
+      console.log(err);
     }
+    console.log("re.lems", res?.length);
+    console.log("res", res);
+    setLength(res?.length);
+    setResult(res);
+    setResultCopy(res);
+    // } catch (error) {
+    //   console.error('Error calling getAllNFTs:', error);
+    // }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllNFTs();
-  },[])
-  
-  const handleSearch= () => {
-  setResultCopy(result);
-  search == "" ? setResultCopy(result): setResultCopy(result.filter((r)=>r[0].toString() == search))
-  }
+  }, []);
 
+  const handleSearch = () => {
+    setResultCopy(result);
+    search == ""
+      ? setResultCopy(result)
+      : setResultCopy(result.filter((r) => r[0].toString() == search));
+  };
 
   return (
     <div className="dark:bg-neutral-950">
@@ -49,16 +54,15 @@ const {signer} = useWallet();
             class=" relative top-24 w-full z-20"
             onSubmit={(e) => e.preventDefault()}
           >
-            <label
-              className=" mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-            >
+            <label className=" mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
               Search
             </label>
             <div class="relative flex justify-center items-center">
               <div className="text-neutral-400 w-1/3 p-[12.5px] border-[1px] border-neutral-200 rounded-lg mb-4 ml-4 font-bold flex justify-center bg-neutral-900">
                 Total Minted NFTs : {length}
               </div>
-              <Link to={`/view/${length}`}
+              <Link
+                to={`/view/${length}`}
                 className="text-neutral-400 w-1/3 p-[12.5px] border-[1px] border-neutral-200 rounded-lg mb-4 mx-4 font-bold flex justify-center bg-neutral-900 cursor-pointer"
                 // onClick={() => {console.log(length);setSearch(length)}} // not working try later
               >
@@ -85,6 +89,6 @@ const {signer} = useWallet();
       </div>
     </div>
   );
-}
+};
 
-export default Viewnft
+export default Viewnft;
