@@ -43,13 +43,13 @@ export function Floatingmenu() {
       href: "/profile",
     },
 
-    {
+    /*{
       title: "Twitter",
       icon: (
         <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "https://github.com/toffee-k21/NFTorium",
-    },
+    },*/
     {
       title: "GitHub",
       icon: (
