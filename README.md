@@ -29,6 +29,17 @@ This project is open source and thrives on collaboration! Join us in shaping the
 - MetaMask or any Ethereum-compatible wallet
 - Test ETH from Sepolia Faucet
 - Clone the Repository
+
+### Network Configuration
+- The project is built specifically for the Sepolia Testnet and is not configured to work with the Ethereum Mainnet. Connecting with MetaMask using Mainnet may result in errors.
+
+Setup Instructions:
+- Install MetaMask
+- If you haven’t installed MetaMask, download it from metamask.io and set up your wallet.
+- Switch to Sepolia Testnet
+- Ensure that your MetaMask wallet is set to Sepolia Testnet before interacting with the application.
+If you are facing issues, manually switch networks in MetaMask by navigating to:
+MetaMask → Settings → Networks → Select Sepolia Testnet.
   
 ```git clone https://github.com/yourusername/nftorium.git``` 
 ```cd nftorium```
