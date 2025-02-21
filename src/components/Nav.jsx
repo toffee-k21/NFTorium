@@ -22,7 +22,7 @@ const Nav = () => {
             <span className="mx-4 text-gray-500"> | </span> NFTorium
           </div>
           <button
-            className="w-full bg-[#383737] px-3 py-2 hover:bg-[#4f4e4e] sm:w-auto sm:bg-transparent text-white sm:block hidden  text-white font-semibold rounded-lg text-center bg-gradient-to-r p-2 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)] cursor-pointer flex justify-center items-center "
+            className="w-60 overflow-hidden bg-[#383737] px-3 py-2 hover:bg-[#4f4e4e] sm:bg-transparent sm:block  text-white font-semibold rounded-lg text-center bg-gradient-to-r p-2 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)] cursor-pointer flex justify-center items-center "
             onClick={connectWallet}
           >
             {signer ? `${account}` : `Connect your Wallet`}
