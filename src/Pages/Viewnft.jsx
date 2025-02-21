@@ -87,10 +87,15 @@ const Viewnft = () => {
           </form>
         </div>
         {
-          length <=1 ? <div>
+          length == 0 ? <div>
             {/* complete card shimmer properly */}
-         <div className="h-300px bg-black">loading</div>
-        </div> : <CardContainer nfts={resultCopy} />
+         <div className="h-screen bg-black z-0 flex gap-2 flex-wrap justify-center">
+         <div className="m-2 md:m-[8px] w-[200px] sm:w-[307px] rounded-md h-4/6 relative flex items-center justify-center bg-neutral-900"></div>
+         <div className="m-2 md:m-[8px] w-[200px] sm:w-[307px] rounded-md h-4/6 relative flex items-center justify-center bg-neutral-900"></div>
+         <div className="m-2 md:m-[8px] w-[200px] sm:w-[307px] rounded-md h-4/6 relative flex items-center justify-center bg-neutral-900"></div>
+         </div>
+        </div> : 
+        <CardContainer nfts={resultCopy} />
         }
       </div>
     </div>

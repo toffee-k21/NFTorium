@@ -10,7 +10,7 @@ const Listnft = () => {
   return (
     <div className="overflow-hidden bg-black">
       <Vortex>
-        <div className="my-10 z-10">
+        <div className="my-20 z-10">
           <PopUp />
         </div>
    </Vortex>

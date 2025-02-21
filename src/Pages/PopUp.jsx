@@ -84,7 +84,7 @@ export function PopUp() {
            };
 
   return (
-    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl sm:p-4 pt-20 md:p-8 shadow-input bg-white dark:bg-black/70">
+    <div className="h-screen max-w-md w-full mx-auto rounded-none md:rounded-2xl sm:p-4 pt-20 md:p-8 shadow-input bg-white dark:bg-black/70">
       {message == "Uploaded File" ? (
         <div
           className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-neutral-900 dark:text-green-400 "
