@@ -12,7 +12,7 @@ const Viewnft = () => {
   const [result, setResult] = useState([]);
   const [resultCopy, setResultCopy] = useState([]);
   const [search, setSearch] = useState([]);
-  const [length, setLength] = useState([]);
+  const [length, setLength] = useState(0);
 
   const { signer } = useWallet();
 
@@ -47,9 +47,9 @@ const Viewnft = () => {
       : setResultCopy(result.filter((r) => r[0].toString() == search));
   };
 
-  return (
+  return  (
     <div className="dark:bg-neutral-950">
-      <div className="h-[500px] w-full">
+      <div className="h-full w-full">
         <div className="sticky z-40 top-0 left-0 dark:bg-neutral-950 h-40 w-full">
           <form
             class=" relative top-24 w-full z-20"
@@ -86,7 +86,12 @@ const Viewnft = () => {
             </div>
           </form>
         </div>
-        <CardContainer nfts={resultCopy} />
+        {
+          length <=1 ? <div>
+            {/* complete card shimmer properly */}
+         <div className="h-300px bg-black">loading</div>
+        </div> : <CardContainer nfts={resultCopy} />
+        }
       </div>
     </div>
   );

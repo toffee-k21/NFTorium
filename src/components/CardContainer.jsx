@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import Card from "./Card";
 
+
 export default function CardContainer({nfts}) {
   console.log("nfts",nfts);
   const links = [
@@ -50,8 +51,7 @@ export default function CardContainer({nfts}) {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-950 w-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700  ",
-        "h-[85%]"
+        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-950 w-full h-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700  ",
       )}
       style={{ scrollbarWidth: "none" }}
     >
