@@ -10,7 +10,12 @@ export const WalletProvider = ({ children }) => {
 
   useEffect(() => {
     const checkConnection = async () => {
-      if (window.ethereum) {
+      if (window.ethereum?.isMetaMask) {
+        console.log("Using MetaMask");
+      } else {
+        console.error("Only MetaMask is supported. Please disable other wallets.");
+      }
+      if (window.ethereum?.isMetaMask) {
             try {
              await window.ethereum.request({
               method: "wallet_switchEthereumChain",
