@@ -11,7 +11,6 @@ export const WalletProvider = ({ children }) => {
   useEffect(() => {
     const checkConnection = async () => {
       if (window.ethereum) {
-        
             try {
              await window.ethereum.request({
               method: "wallet_switchEthereumChain",
@@ -20,7 +19,7 @@ export const WalletProvider = ({ children }) => {
             } catch (error) {
             console.error("Failed to switch network", error);
             }
-
+            
         const browserProvider = new ethers.BrowserProvider(window.ethereum);
         const signer = await browserProvider.getSigner();
         const address = await signer.getAddress();
