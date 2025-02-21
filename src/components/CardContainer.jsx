@@ -60,7 +60,7 @@ export default function CardContainer({nfts}) {
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
-              {links.map((link, idx) => (
+              {links?.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
             </div>
@@ -104,10 +104,10 @@ export const LogoIcon = () => {
 const Dashboard = ({nfts}) => {
   console.log("nfts",nfts);
   return (
-    <div className="flex flex-1 ">
+    <div className="flex flex-1 h-full">
       <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black flex flex-col gap-2 flex-1 w-full h-full">
         <div className="z-0 flex gap-2 flex-wrap h-full overflow-y-scroll justify-center" style={{scrollbarWidth:"none"}}>
-          {nfts.map((i) => (
+          {nfts?.map((i) => (
             <Card
               key={"first-array" + i}
               tokenId={i[0].toString()}

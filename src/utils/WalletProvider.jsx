@@ -11,6 +11,16 @@ export const WalletProvider = ({ children }) => {
   useEffect(() => {
     const checkConnection = async () => {
       if (window.ethereum) {
+        
+            try {
+             await window.ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: "0xaa36a7" }], // Sepolia Chain ID (11155111 in hex)
+             });
+            } catch (error) {
+            console.error("Failed to switch network", error);
+            }
+
         const browserProvider = new ethers.BrowserProvider(window.ethereum);
         const signer = await browserProvider.getSigner();
         const address = await signer.getAddress();
@@ -20,7 +30,7 @@ export const WalletProvider = ({ children }) => {
       }
     };
     checkConnection();
-  }, []);
+  }, [window.ethereum]);
 
   const connectWallet = async () => {
     if (!window.ethereum) return alert("No crypto wallet found!");

@@ -20,10 +20,11 @@ const Viewnft = () => {
     console.log("address:", contractAddress, "abi:", abi, "signer:", signer);
     const contract = new Contract(contractAddress, abi, signer);
     console.log("contract", contract);
+    let res;
     try {
-      const res = await contract.getAllNFTs();
+       res = await contract.getAllNFTs();
     } catch (err) {
-      console.log(err);
+      alert("Please switch to sepolia testnet in your metamask !")
     }
     console.log("re.lems", res?.length);
     console.log("res", res);
