@@ -28,6 +28,7 @@ const NFT = () => {
      const [displayPrice, setDisplayPrice] = useState(0);
      const [address,setAddress] = useState(null);
      const [pricePop, setPricePop] = useState(null);
+     const [alert, setAlert] = useState(false);
      const navigate = useNavigate();
      let provider;
 
@@ -63,17 +64,6 @@ const NFT = () => {
        }
      };
 
-       const handleBuyNFT = async () => {
-        provider = new ethers.BrowserProvider(window.ethereum);
-         const signer = await provider.getSigner();
-         const contract = new Contract(contractAddress, abi, signer);
-         const res = await contract.executeSale(tokenId, {
-           value: price,
-         });
-         await res.wait(2);
-         setMessage("Listed");
-         setOwner(await contract.ownerOf(tokenId));
-       };
 
           const handleRelistNFT = async () => {
             if(reSellPrice == null || reSellPrice <= 0) return;
@@ -98,6 +88,26 @@ const NFT = () => {
 
             }
           };
+
+                 const handleBuyNFT = async () => {
+                   try {
+                     provider = new ethers.BrowserProvider(window.ethereum);
+                     const signer = await provider.getSigner();
+                     const contract = new Contract(
+                       contractAddress,
+                       abi,
+                       signer
+                     );
+                     const res = await contract.executeSale(tokenId, {
+                       value: price,
+                     });
+                     await res.wait(2);
+                     setMessage("Listed");
+                     setOwner(await contract.ownerOf(tokenId));
+                   } catch (err) {
+                     setAlert(true);
+                   }
+                 };
 
      useEffect(() => {
        getNFTImage();
@@ -179,23 +189,32 @@ const NFT = () => {
               </div>
               <div className=" pb-4 pt-10 flex w-full ">
                 {owner == address ? (
-                  <div className='relative w-1/2 mr-4'>
+                  <div className="relative w-1/2 mr-4">
                     <Button
                       text="Sell NFT"
                       className={"p-4"}
-                      onClick={()=>setPricePop(true)}
+                      onClick={() => setPricePop(true)}
                     />
                     {pricePop == true ? (
                       <div className="absolute -top-10 left-0 z-50 w-full h-[150px] flex flex-col justify-center bg-neutral-900 p-2">
-                        <label className='text-white'>Enter Price</label>
+                        <label className="text-white">Enter Price</label>
                         <input
                           className="w-full rounded-md bg-neutral-900 my-2 border-[1px] p-2"
                           type="number"
                           onChange={(e) => setReSellPrice(e.target.value)}
                         />{" "}
-                        <div className='flex '>
-                        <Button className={"w-full mr-1"} text={"Sell !"} onClick={handleRelistNFT} />
-                        <div className="w-full rounded-lg ml-1 bg-black text-white flex justify-center items-center font-semibold cursor-pointer" onClick={()=>setPricePop(false)}>X </div>
+                        <div className="flex ">
+                          <Button
+                            className={"w-full mr-1"}
+                            text={"Sell !"}
+                            onClick={handleRelistNFT}
+                          />
+                          <div
+                            className="w-full rounded-lg ml-1 bg-black text-white flex justify-center items-center font-semibold cursor-pointer"
+                            onClick={() => setPricePop(false)}
+                          >
+                            X{" "}
+                          </div>
                         </div>
                       </div>
                     ) : (
@@ -227,6 +246,7 @@ const NFT = () => {
                   </button>
                 )}
               </div>
+
               {message == "Listed" ? (
                 <div
                   class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
@@ -236,6 +256,18 @@ const NFT = () => {
                 </div>
               ) : (
                 <></>
+              )}
+              {alert ? (
+                <div>
+                  <div
+                    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-red-500 z-100 absolute top-20 "
+                    role="alert"
+                  >
+                    <span class="font-medium">Failed !</span> not enough crypto
+                  </div>
+                </div>
+              ) : (
+                <div></div>
               )}
               <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
